@@ -5,13 +5,19 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
+
 public class Paddle extends Rectangle {
 	
-	int id;
-	int yVelocity;
-	int speed = 8;
+	private static int PADDLE_WIDTH = 25;
+	private static int PADDLE_HEIGHT = 100;
 	
-	public Paddle(int x, int y, int PADDLE_WIDTH, int PADDLE_HEIGHT, int id) {
+	private static Color color = Color.WHITE;
+	
+	private int id;
+	private int yVelocity;
+	private int speed = 8;
+	
+	public Paddle(int x, int y, int id) {
 		super(x, y, PADDLE_WIDTH,PADDLE_HEIGHT);
 		this.id = id; 
 	}
@@ -79,10 +85,10 @@ public class Paddle extends Rectangle {
 	
 	public void draw(Graphics g) {
 		if(id == 1) {
-			g.setColor(Color.BLUE);
+			g.setColor(color);
 		}
 		else {
-			g.setColor(Color.RED);
+			g.setColor(color);
 		}
 		
 		g.fillRect(x, y, width, height);
