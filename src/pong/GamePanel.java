@@ -27,13 +27,16 @@ public class GamePanel extends JPanel implements Runnable {
 	Ball ball;
 	Score score;
 	
+	MyKeyAdapter adapter = new MyKeyAdapter();
+	
 	
 	public GamePanel() {
 		newPaddles();
 		newBall();
 		score = new Score(GAME_WIDTH, GAME_HEIGHT);
 		this.setFocusable(true);
-		this.addKeyListener(new myKeyAdapter());
+		//this.addKeyListener(new myKeyAdapter());
+		this.addKeyListener(adapter);
 		this.setPreferredSize(SCREEN_SIZE);
 		
 		gameThread = new Thread(this);
@@ -49,6 +52,8 @@ public class GamePanel extends JPanel implements Runnable {
 		paddle1 = new Paddle(0,(GAME_HEIGHT/2)-(PADDLE_HEIGHT/2), 1);
 		paddle2 = new Paddle(GAME_WIDTH-PADDLE_WIDTH,(GAME_HEIGHT/2)-(PADDLE_HEIGHT/2), 2);
 		
+		adapter.addNewPaddle(paddle1);
+		adapter.addNewPaddle(paddle2);
 	}
 	
 	public void paint(Graphics g) {
@@ -159,7 +164,7 @@ public class GamePanel extends JPanel implements Runnable {
 		}
 	}
 	
-	
+	/*
 	public class myKeyAdapter extends KeyAdapter {
 		public void keyPressed(KeyEvent e) {
 			paddle1.keyPressed(e);
@@ -171,5 +176,5 @@ public class GamePanel extends JPanel implements Runnable {
 			paddle2.keyReleased(e);
 		}
 	}
-	
+	*/
 }
