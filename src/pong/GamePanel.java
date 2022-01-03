@@ -49,8 +49,8 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 	
 	public void newPaddles() {
-		paddle1 = new Paddle(0,(GAME_HEIGHT/2)-(PADDLE_HEIGHT/2), 1);
-		paddle2 = new Paddle(GAME_WIDTH-PADDLE_WIDTH,(GAME_HEIGHT/2)-(PADDLE_HEIGHT/2), 2);
+		paddle1 = new Paddle(0,(GAME_HEIGHT/2)-(PADDLE_HEIGHT/2), KeyEvent.VK_W, KeyEvent.VK_S);
+		paddle2 = new Paddle(GAME_WIDTH-PADDLE_WIDTH,(GAME_HEIGHT/2)-(PADDLE_HEIGHT/2), KeyEvent.VK_UP, KeyEvent.VK_DOWN);
 		
 		adapter.addNewPaddle(paddle1);
 		adapter.addNewPaddle(paddle2);

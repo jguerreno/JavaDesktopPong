@@ -13,55 +13,35 @@ public class Paddle extends Rectangle {
 	
 	private static Color color = Color.WHITE;
 	
-	private int id;
 	private int yVelocity;
 	private int speed = 8;
 	
+	private int keyUp;
+	private int keyDown;
 	
-	public Paddle(int x, int y, int id) {
+	
+	public Paddle(int x, int y, int keyUp, int keyDown) {
 		super(x, y, PADDLE_WIDTH,PADDLE_HEIGHT);
-		this.id = id; 
+		
+		this.keyUp = keyUp;
+		this.keyDown = keyDown;
 	}
 	
 	public void keyPressed(KeyEvent e) {
-		switch(id) {
-			case 1:
-				if(e.getKeyCode() == KeyEvent.VK_W) {
-					setYDirection(-speed);
-					move();
-				}
-				if(e.getKeyCode() == KeyEvent.VK_S) {
-					setYDirection(speed);
-					move();
-				}
-			break;
-			
-			case 2:
-				if(e.getKeyCode() == KeyEvent.VK_UP) {
-					setYDirection(-speed);
-					move();
-				}
-				if(e.getKeyCode() == KeyEvent.VK_DOWN) {
-					setYDirection(speed);
-					move();
-				}
-			break;
+		if(e.getKeyCode() == keyUp) {
+			setYDirection(-speed);
+			move();
+		}
+		
+		if(e.getKeyCode() == keyDown) {
+			setYDirection(speed);
+			move();
 		}
 	}
 	
 	public void keyReleased(KeyEvent e) {
-		switch(id) {
-		case 1:
-			if(e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_S) {
-				this.stopPaddle();
-			}
-		break;
-		
-		case 2:
-			if(e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN) {
-				this.stopPaddle();
-			}
-		break;
+		if(e.getKeyCode() == keyDown || e.getKeyCode() == keyUp) {
+			this.stopPaddle();
 		}
 	}
 	
