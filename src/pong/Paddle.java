@@ -51,27 +51,17 @@ public class Paddle extends Rectangle {
 	public void keyReleased(KeyEvent e) {
 		switch(id) {
 		case 1:
-			if(e.getKeyCode() == KeyEvent.VK_W) {
-				setYDirection(0);
-				move();
-			}
-			if(e.getKeyCode() == KeyEvent.VK_S) {
-				setYDirection(0);
-				move();
+			if(e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_S) {
+				this.stopPaddle();
 			}
 		break;
 		
 		case 2:
-			if(e.getKeyCode() == KeyEvent.VK_UP) {
-				setYDirection(0);
-				move();
-			}
-			if(e.getKeyCode() == KeyEvent.VK_DOWN) {
-				setYDirection(0);
-				move();
+			if(e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN) {
+				this.stopPaddle();
 			}
 		break;
-	}
+		}
 	}
 	
 	public void setYDirection(int yDirection) {
@@ -94,5 +84,14 @@ public class Paddle extends Rectangle {
 		g.fillRect(x, y, width, height);
 	}
 
+
+	public void movePaddle() {
+		setYDirection(-speed);
+		move();
+	}
 	
+	public void stopPaddle() {
+		setYDirection(0);
+		move();
+	}
 }
