@@ -17,6 +17,7 @@ public class Paddle extends Rectangle {
 	private int yVelocity;
 	private int speed = 8;
 	
+	
 	public Paddle(int x, int y, int id) {
 		super(x, y, PADDLE_WIDTH,PADDLE_HEIGHT);
 		this.id = id; 
@@ -74,13 +75,7 @@ public class Paddle extends Rectangle {
 	
 	
 	public void draw(Graphics g) {
-		if(id == 1) {
-			g.setColor(color);
-		}
-		else {
-			g.setColor(color);
-		}
-		
+		g.setColor(color);
 		g.fillRect(x, y, width, height);
 	}
 
