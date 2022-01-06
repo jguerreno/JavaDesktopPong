@@ -3,7 +3,6 @@ package pong;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 
@@ -22,6 +21,7 @@ public class GamePanel extends JPanel implements Runnable {
 	Image image;
 	Graphics graphics;
 	Random random;
+	
 	Paddle paddle1;
 	Paddle paddle2;
 	Ball ball;
@@ -35,7 +35,6 @@ public class GamePanel extends JPanel implements Runnable {
 		newBall();
 		score = new Score(GAME_WIDTH, GAME_HEIGHT);
 		this.setFocusable(true);
-		//this.addKeyListener(new myKeyAdapter());
 		this.addKeyListener(adapter);
 		this.setPreferredSize(SCREEN_SIZE);
 		
@@ -59,6 +58,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public void paint(Graphics g) {
 		image = createImage(getWidth(), getHeight());
 		graphics = image.getGraphics();
+		
 		draw(graphics);
 		g.drawImage(image, 0, 0, this);
 	}
@@ -84,74 +84,23 @@ public class GamePanel extends JPanel implements Runnable {
 	public void checkCollision() {
 		// Bounce ball off top and bottom window edges
 		ball.checkBounceWithBoard(board);
-		//if(ball.y <= 0) {
-			//ball.setYDirection(-ball.yVelocity);
-		//}
-		//if(ball.y >= (GAME_HEIGHT-BALL_DIAMETER)) {
-			//ball.setYDirection(-ball.yVelocity);
-		//}
-		
-		
+
 		
 		// Bounce ball off paddles
 		ball.checkBounceWithPaddle(paddle1);
 		ball.checkBounceWithPaddle(paddle2);
 		
-
-		//if(ball.intersects(paddle1)) {
-			//ball.xVelocity = Math.abs(ball.xVelocity);
-			
-			//ball.xVelocity++; // va aumnetado la velociadd opcional
-			//if(ball.yVelocity>0) {
-				//ball.yVelocity++;
-			//}
-			//else {
-				//ball.yVelocity--;
-			//}
-			
-			//ball.setXDirection(ball.xVelocity);
-			//ball.setYDirection(ball.yVelocity);
-		//}
-		//if(ball.intersects(paddle2)) {
-			//ball.xVelocity = -ball.xVelocity;
-			
-			//ball.xVelocity--; // va aumnetado la velociadd opcional
-			//if(ball.yVelocity>0) {
-				//ball.yVelocity++;
-			//}
-			//else {
-				//ball.yVelocity--;
-			//}
-			
-			//ball.setXDirection(ball.xVelocity);
-			//ball.setYDirection(ball.yVelocity);
-		//}
-		
-		
 				
 		// Stops paddles at window edges
 		paddle1.checkCollisionWithBoard(board);
 		paddle2.checkCollisionWithBoard(board);
-		//if(paddle1.y<=0) {
-			//paddle1.y=0;
-		//}
-		//if(paddle1.y>=(GAME_HEIGHT-PADDLE_HEIGHT)) {
-			//paddle1.y=GAME_HEIGHT-PADDLE_HEIGHT;
-		//}
-		//if(paddle2.y<=0) {
-			//paddle2.y=0;
-		//}
-		//if(paddle2.y>=(GAME_HEIGHT-PADDLE_HEIGHT)) {
-			//paddle2.y=GAME_HEIGHT-PADDLE_HEIGHT;
-		//}
-		
-		
-		
+
+				
 		// Give a player 1 point and creates new paddles and ball
 		// ball.checkPoint(board);
 		
-		// paddle1.checkPointOf(paddle2, ball);
-		// paddle2.checkPointOf(paddle1, ball);
+		// paddle1.checkPoint(ball);
+		// paddle2.checkPoint(ball);
 		
 		//mirar ahora porque vamos a necesitar un getScore
 		

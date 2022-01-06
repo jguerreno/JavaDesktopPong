@@ -88,4 +88,20 @@ public class Ball extends Rectangle {
 	// ball.changeDirection();
 	// increaseSpeed();
 	// move()
+	
+	
+	//if(ball.intersects(paddle2)) {
+	//ball.xVelocity = -ball.xVelocity;
+	
+	//ball.xVelocity--; // va aumnetado la velociadd opcional
+	//if(ball.yVelocity>0) {
+		//ball.yVelocity++;
+	//}
+	//else {
+		//ball.yVelocity--;
+	//}
+	
+	//ball.setXDirection(ball.xVelocity);
+	//ball.setYDirection(ball.yVelocity);
+	//}
 }
