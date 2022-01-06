@@ -6,7 +6,9 @@ import java.awt.Rectangle;
 import java.util.Random;
 
 public class Ball extends Rectangle {
-
+	
+	private final int BALL_DIAMETER = 20;
+	
 	Random random;
 	int xVelocity;
 	int yVelocity;
@@ -47,5 +49,17 @@ public class Ball extends Rectangle {
 		g.fillOval(x, y, height, width);
 	}
 	
-
+	
+	
+	public void checkBounceWithBoard(GameBoard board) {
+		final int leftLimit = board.getHeight() - BALL_DIAMETER;
+		
+		if(y <= 0 || y >= leftLimit) {
+			this.bounde();
+		}
+	}
+	
+	public void bounde() {
+		yVelocity *= -1;
+	}
 }

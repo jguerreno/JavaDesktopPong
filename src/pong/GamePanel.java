@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 
 public class GamePanel extends JPanel implements Runnable {
-
+	// abstraer la logica del colition
 	static final int GAME_WIDTH = 1000;
 	static final int GAME_HEIGHT = (int)(GAME_WIDTH * 0.5);
 	static final Dimension SCREEN_SIZE = new Dimension(GAME_WIDTH, GAME_HEIGHT);
@@ -28,7 +28,7 @@ public class GamePanel extends JPanel implements Runnable {
 	Score score;
 	
 	MyKeyAdapter adapter = new MyKeyAdapter();
-	
+	GameBoard board = new GameBoard();	// !!!
 	
 	public GamePanel() {
 		newPaddles();
@@ -83,16 +83,25 @@ public class GamePanel extends JPanel implements Runnable {
 	
 	public void checkCollision() {
 		// Bounce ball off top and bottom window edges
-		if(ball.y <= 0) {
-			ball.setYDirection(-ball.yVelocity);
-		}
-		if(ball.y >= (GAME_HEIGHT-BALL_DIAMETER)) {
-			ball.setYDirection(-ball.yVelocity);
-		}
+		ball.checkBounceWithBoard(board);
+		//if(ball.y <= 0) {
+			//ball.setYDirection(-ball.yVelocity);
+		//}
+		//if(ball.y >= (GAME_HEIGHT-BALL_DIAMETER)) {
+			//ball.setYDirection(-ball.yVelocity);
+		//}
+		
 		
 		// Bounce ball off paddles
+		// ball.checkBounceWithPaddle(paddle1);
+		// ball.checkBounceWithPaddle(paddle2);
+		
+		// ball.changeDirection();
+		// increaseSpeed();
+		// move()
 		if(ball.intersects(paddle1)) {
 			ball.xVelocity = Math.abs(ball.xVelocity);
+			
 			ball.xVelocity++; // va aumnetado la velociadd opcional
 			if(ball.yVelocity>0) {
 				ball.yVelocity++;
@@ -100,11 +109,13 @@ public class GamePanel extends JPanel implements Runnable {
 			else {
 				ball.yVelocity--;
 			}
+			
 			ball.setXDirection(ball.xVelocity);
 			ball.setYDirection(ball.yVelocity);
 		}
 		if(ball.intersects(paddle2)) {
 			ball.xVelocity = -ball.xVelocity;
+			
 			ball.xVelocity--; // va aumnetado la velociadd opcional
 			if(ball.yVelocity>0) {
 				ball.yVelocity++;
@@ -112,12 +123,15 @@ public class GamePanel extends JPanel implements Runnable {
 			else {
 				ball.yVelocity--;
 			}
+			
 			ball.setXDirection(ball.xVelocity);
 			ball.setYDirection(ball.yVelocity);
 		}
 		
 		
 		// Stops paddles at window edges
+		// paddle1.checkCollisionWithBoard(board);
+		// paddle2.checkCollisionWithBoard(board);
 		if(paddle1.y<=0) {
 			paddle1.y=0;
 		}
@@ -131,15 +145,24 @@ public class GamePanel extends JPanel implements Runnable {
 			paddle2.y=GAME_HEIGHT-PADDLE_HEIGHT;
 		}
 		
+		
+		
 		// Give a player 1 point and creates new paddles and ball
+		// ball.checkPoint(board);
+		
+		// paddle1.checkPointOf(paddle2, ball);
+		// paddle2.checkPointOf(paddle1, ball);
+		
+		//mirar ahora porque vamos a necesitar un getScore
+		
 		if(ball.x <= 0) {
 			score.player2++;
-			newPaddles();
+			//newPaddles();
 			newBall();
 		}
 		if(ball.x >= (GAME_WIDTH-BALL_DIAMETER)) {
 			score.player1++;
-			newPaddles();
+			//newPaddles();
 			newBall();
 		}
 	}
@@ -164,17 +187,4 @@ public class GamePanel extends JPanel implements Runnable {
 		}
 	}
 	
-	/*
-	public class myKeyAdapter extends KeyAdapter {
-		public void keyPressed(KeyEvent e) {
-			paddle1.keyPressed(e);
-			paddle2.keyPressed(e);
-		}
-		
-		public void keyReleased(KeyEvent e) {
-			paddle1.keyReleased(e);
-			paddle2.keyReleased(e);
-		}
-	}
-	*/
 }
