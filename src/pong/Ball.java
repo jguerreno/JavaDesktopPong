@@ -55,11 +55,37 @@ public class Ball extends Rectangle {
 		final int leftLimit = board.getHeight() - BALL_DIAMETER;
 		
 		if(y <= 0 || y >= leftLimit) {
-			this.bounde();
+			this.boundeY();
 		}
 	}
 	
-	public void bounde() {
+	public void boundeY() {
 		yVelocity *= -1;
 	}
+	
+	public void boundeX() {
+		xVelocity *= -1;
+	}
+	
+	
+	public void checkBounceWithPaddle(Paddle paddle) {
+		if(this.intersects(paddle)) {
+			this.boundeX();
+			this.increaseSpeed();
+			
+			this.move();
+		}
+	}
+	
+	public void increaseSpeed() {
+		xVelocity += Integer.signum(xVelocity);
+		yVelocity += Integer.signum(yVelocity);
+		
+		xVelocity = Math.min(Math.abs(xVelocity), 10) * Integer.signum(xVelocity);
+		yVelocity = Math.min(Math.abs(yVelocity), 10) * Integer.signum(yVelocity);
+	}
+	
+	// ball.changeDirection();
+	// increaseSpeed();
+	// move()
 }

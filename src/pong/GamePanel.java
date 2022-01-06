@@ -92,43 +92,43 @@ public class GamePanel extends JPanel implements Runnable {
 		//}
 		
 		
+		
 		// Bounce ball off paddles
-		// ball.checkBounceWithPaddle(paddle1);
-		// ball.checkBounceWithPaddle(paddle2);
+		ball.checkBounceWithPaddle(paddle1);
+		ball.checkBounceWithPaddle(paddle2);
 		
-		// ball.changeDirection();
-		// increaseSpeed();
-		// move()
-		if(ball.intersects(paddle1)) {
-			ball.xVelocity = Math.abs(ball.xVelocity);
+
+		//if(ball.intersects(paddle1)) {
+			//ball.xVelocity = Math.abs(ball.xVelocity);
 			
-			ball.xVelocity++; // va aumnetado la velociadd opcional
-			if(ball.yVelocity>0) {
-				ball.yVelocity++;
-			}
-			else {
-				ball.yVelocity--;
-			}
+			//ball.xVelocity++; // va aumnetado la velociadd opcional
+			//if(ball.yVelocity>0) {
+				//ball.yVelocity++;
+			//}
+			//else {
+				//ball.yVelocity--;
+			//}
 			
-			ball.setXDirection(ball.xVelocity);
-			ball.setYDirection(ball.yVelocity);
-		}
-		if(ball.intersects(paddle2)) {
-			ball.xVelocity = -ball.xVelocity;
+			//ball.setXDirection(ball.xVelocity);
+			//ball.setYDirection(ball.yVelocity);
+		//}
+		//if(ball.intersects(paddle2)) {
+			//ball.xVelocity = -ball.xVelocity;
 			
-			ball.xVelocity--; // va aumnetado la velociadd opcional
-			if(ball.yVelocity>0) {
-				ball.yVelocity++;
-			}
-			else {
-				ball.yVelocity--;
-			}
+			//ball.xVelocity--; // va aumnetado la velociadd opcional
+			//if(ball.yVelocity>0) {
+				//ball.yVelocity++;
+			//}
+			//else {
+				//ball.yVelocity--;
+			//}
 			
-			ball.setXDirection(ball.xVelocity);
-			ball.setYDirection(ball.yVelocity);
-		}
+			//ball.setXDirection(ball.xVelocity);
+			//ball.setYDirection(ball.yVelocity);
+		//}
 		
 		
+				
 		// Stops paddles at window edges
 		// paddle1.checkCollisionWithBoard(board);
 		// paddle2.checkCollisionWithBoard(board);
