@@ -16,6 +16,7 @@ public class Paddle extends Rectangle {
 	private int yVelocity;
 	private int speed = 8;
 	
+	// Direction currentDirection;
 	private int keyUp;
 	private int keyDown;
 	
@@ -68,5 +69,16 @@ public class Paddle extends Rectangle {
 	public void stopPaddle() {
 		setYDirection(0);
 		move();
+	}
+	
+	public void checkCollisionWithBoard(GameBoard board) {
+		final int bottomLimit = board.getHeight() - PADDLE_HEIGHT;
+		
+		if(y<=0) {
+			y=0;
+		}
+		if(y >= bottomLimit) {
+			y = bottomLimit;
+		}
 	}
 }
