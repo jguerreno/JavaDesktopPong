@@ -85,6 +85,21 @@ public class Ball extends Rectangle {
 		yVelocity = Math.min(Math.abs(yVelocity), 10) * Integer.signum(yVelocity);
 	}
 	
+	public boolean checkPoint(GameBoard board, Paddle paddle1, Paddle paddle2) {
+		if(x <= 0) {
+			paddle2.increaseScore();
+			
+			return true;
+		}
+		if(x >= (board.getWidth()-BALL_DIAMETER)) {
+			paddle1.increaseScore();
+			
+			return true;
+		}
+		
+		return false;
+	}
+	
 	// ball.changeDirection();
 	// increaseSpeed();
 	// move()

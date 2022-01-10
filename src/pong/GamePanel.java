@@ -69,7 +69,7 @@ public class GamePanel extends JPanel implements Runnable {
 		
 		ball.draw(g);
 		
-		score.draw(g);
+		score.draw(g, paddle1.currentScore(), paddle2.currentScore());
 	}
 	
 	
@@ -97,13 +97,14 @@ public class GamePanel extends JPanel implements Runnable {
 
 				
 		// Give a player 1 point and creates new paddles and ball
-		// ball.checkPoint(board);
+		if(ball.checkPoint(board, paddle1, paddle2))
+			this.newBall();
 		
 		// paddle1.checkPoint(ball);
 		// paddle2.checkPoint(ball);
 		
 		//mirar ahora porque vamos a necesitar un getScore
-		
+		/*
 		if(ball.x <= 0) {
 			score.player2++;
 			//newPaddles();
@@ -114,6 +115,7 @@ public class GamePanel extends JPanel implements Runnable {
 			//newPaddles();
 			newBall();
 		}
+		*/
 	}
 	
 	public void run() {

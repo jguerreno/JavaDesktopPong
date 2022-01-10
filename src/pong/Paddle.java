@@ -20,6 +20,9 @@ public class Paddle extends Rectangle {
 	private int keyUp;
 	private int keyDown;
 	
+	// Score
+	private int score = 0;
+	
 	
 	public Paddle(int x, int y, int keyUp, int keyDown) {
 		super(x, y, PADDLE_WIDTH,PADDLE_HEIGHT);
@@ -27,7 +30,7 @@ public class Paddle extends Rectangle {
 		this.keyUp = keyUp;
 		this.keyDown = keyDown;
 	}
-	
+
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == keyUp) {
 			setYDirection(-speed);
@@ -80,5 +83,14 @@ public class Paddle extends Rectangle {
 		if(y >= bottomLimit) {
 			y = bottomLimit;
 		}
+	}
+	
+	
+	public void increaseScore() {
+		score++;
+	}
+	
+	public int currentScore() {
+		return score;
 	}
 }
