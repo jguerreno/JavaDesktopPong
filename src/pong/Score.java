@@ -7,24 +7,21 @@ import java.awt.Rectangle;
 
 public class Score extends Rectangle{
 
-	private final int GAME_WIDTH;
-	private final int GAME_HEIGHT;
-	int player1;
-	int player2;
+	private final GameBoard BOARD;
 	
-	public Score(int width, int height) {
-		GAME_WIDTH = width;
-		GAME_HEIGHT = height;
+	
+	public Score(GameBoard board) {
+		BOARD = board;
 	}
+	
 	
 	public void draw(Graphics g, int paddle1Score, int paddle2Score) {
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Consolas", Font.PLAIN, 60));
 		
-		g.drawLine(GAME_WIDTH/2, 0, GAME_WIDTH/2, GAME_HEIGHT);
+		g.drawLine(BOARD.getWidthCenter(), 0, BOARD.getWidthCenter(), BOARD.getHeight());
 		
-		g.drawString(String.valueOf(paddle1Score/10)+String.valueOf(paddle1Score%10), (GAME_WIDTH/2)-85, 50);
-		g.drawString(String.valueOf(paddle2Score/10)+String.valueOf(paddle2Score%10), (GAME_WIDTH/2)+20, 50);
+		g.drawString(String.valueOf(paddle1Score/10)+String.valueOf(paddle1Score%10), BOARD.getWidthCenter()-85, 50);
+		g.drawString(String.valueOf(paddle2Score/10)+String.valueOf(paddle2Score%10), BOARD.getWidthCenter()+20, 50);
 	}
-	
 }

@@ -33,7 +33,7 @@ public class Ball extends Rectangle {
 	}
 	
 	public Ball(GameBoard board) {		
-		super((int)board.getWidthCenter()-(BALL_DIAMETER/2), random.nextInt(board.getHeight()-BALL_DIAMETER), BALL_DIAMETER, BALL_DIAMETER);
+		super(board.getWidthCenter()-(BALL_DIAMETER/2), random.nextInt(board.getHeight()-BALL_DIAMETER), BALL_DIAMETER, BALL_DIAMETER);
 
 		//ACA MEJORAR
 		int randomXDirection = random.nextInt(2);

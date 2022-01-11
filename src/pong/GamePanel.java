@@ -13,11 +13,10 @@ public class GamePanel extends JPanel implements Runnable {
 	// abstraer la logica del colition
 	private static final int GAME_WIDTH = 1000;
 	private static final int GAME_HEIGHT = (int)(GAME_WIDTH * 0.5);
-	// ACA EsTO SE VA
-	static final Dimension SCREEN_SIZE = new Dimension(GAME_WIDTH, GAME_HEIGHT);
 	// Mejorar
 	private static final int PADDLE_WIDTH = 25;
 	private static final int PADDLE_HEIGHT = 100;
+	
 	private Thread gameThread;
 	private Graphics graphics;
 	
@@ -27,17 +26,17 @@ public class GamePanel extends JPanel implements Runnable {
 	private Score score;
 	
 	private MyKeyAdapter adapter = new MyKeyAdapter();
-	private GameBoard board = new GameBoard();	// !!!
+	private GameBoard board = new GameBoard();
+	
 	
 	public GamePanel() {
 		newPaddles();
 		ball = new Ball(board);
-		score = new Score(GAME_WIDTH, GAME_HEIGHT);
+		score = new Score(board);
 		
 		this.setFocusable(true);
 		this.addKeyListener(adapter);
-		//this.setPreferredSize(board.getBoardDimension());
-		this.setPreferredSize(SCREEN_SIZE);
+		this.setPreferredSize(board.getBoardDimension());
 		
 		gameThread = new Thread(this);
 		gameThread.start();
