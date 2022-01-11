@@ -11,41 +11,38 @@ import javax.swing.JPanel;
 
 public class GamePanel extends JPanel implements Runnable {
 	// abstraer la logica del colition
-	static final int GAME_WIDTH = 1000;
-	static final int GAME_HEIGHT = (int)(GAME_WIDTH * 0.5);
+	private static final int GAME_WIDTH = 1000;
+	private static final int GAME_HEIGHT = (int)(GAME_WIDTH * 0.5);
+	// ACA EsTO SE VA
 	static final Dimension SCREEN_SIZE = new Dimension(GAME_WIDTH, GAME_HEIGHT);
-	static final int BALL_DIAMETER = 20;
-	static final int PADDLE_WIDTH = 25;
-	static final int PADDLE_HEIGHT = 100;
-	Thread gameThread;
-	Image image;
-	Graphics graphics;
-	Random random;
+	// Mejorar
+	private static final int PADDLE_WIDTH = 25;
+	private static final int PADDLE_HEIGHT = 100;
+	private Thread gameThread;
+	private Graphics graphics;
 	
-	Paddle paddle1;
-	Paddle paddle2;
-	Ball ball;
-	Score score;
+	private Paddle paddle1;
+	private Paddle paddle2;
+	private Ball ball;
+	private Score score;
 	
-	MyKeyAdapter adapter = new MyKeyAdapter();
-	GameBoard board = new GameBoard();	// !!!
+	private MyKeyAdapter adapter = new MyKeyAdapter();
+	private GameBoard board = new GameBoard();	// !!!
 	
 	public GamePanel() {
 		newPaddles();
-		newBall();
+		ball = new Ball(board);
 		score = new Score(GAME_WIDTH, GAME_HEIGHT);
+		
 		this.setFocusable(true);
 		this.addKeyListener(adapter);
+		//this.setPreferredSize(board.getBoardDimension());
 		this.setPreferredSize(SCREEN_SIZE);
 		
 		gameThread = new Thread(this);
 		gameThread.start();
 	}
 	
-	public void newBall() {
-		random = new Random();
-		ball = new Ball((GAME_WIDTH/2)-(BALL_DIAMETER/2), random.nextInt(GAME_HEIGHT-BALL_DIAMETER), BALL_DIAMETER, BALL_DIAMETER);
-	}
 	
 	public void newPaddles() {
 		paddle1 = new Paddle(0,(GAME_HEIGHT/2)-(PADDLE_HEIGHT/2), KeyEvent.VK_W, KeyEvent.VK_S);
@@ -56,7 +53,7 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 	
 	public void paint(Graphics g) {
-		image = createImage(getWidth(), getHeight());
+		Image image = createImage(getWidth(), getHeight());
 		graphics = image.getGraphics();
 		
 		draw(graphics);
@@ -98,24 +95,7 @@ public class GamePanel extends JPanel implements Runnable {
 				
 		// Give a player 1 point and creates new paddles and ball
 		if(ball.checkPoint(board, paddle1, paddle2))
-			this.newBall();
-		
-		// paddle1.checkPoint(ball);
-		// paddle2.checkPoint(ball);
-		
-		//mirar ahora porque vamos a necesitar un getScore
-		/*
-		if(ball.x <= 0) {
-			score.player2++;
-			//newPaddles();
-			newBall();
-		}
-		if(ball.x >= (GAME_WIDTH-BALL_DIAMETER)) {
-			score.player1++;
-			//newPaddles();
-			newBall();
-		}
-		*/
+			ball = new Ball(board);
 	}
 	
 	public void run() {

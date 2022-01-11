@@ -7,16 +7,15 @@ import java.util.Random;
 
 public class Ball extends Rectangle {
 	
-	private final int BALL_DIAMETER = 20;
+	private static int BALL_DIAMETER = 20;
+	private static Random random = new Random();
+	private int xVelocity;
+	private int yVelocity;
+	private int initialSpeed = 4;
 	
-	Random random;
-	int xVelocity;
-	int yVelocity;
-	int initialSpeed = 4;
 	
-	
-	public Ball(int x, int y, int width, int height) {
-		super(x, y, width, height);
+	public Ball(int x, int y, int diameter) {
+		super(x, y, diameter, diameter);
 		random = new Random();
 		int randomXDirection = random.nextInt(2);
 		if(randomXDirection == 0) {
@@ -29,7 +28,28 @@ public class Ball extends Rectangle {
 			randomYDirection--;
 		}
 		setYDirection(randomYDirection*initialSpeed);
+		
+		BALL_DIAMETER = diameter;
 	}
+	
+	public Ball(GameBoard board) {		
+		super((int)board.getWidthCenter()-(BALL_DIAMETER/2), random.nextInt(board.getHeight()-BALL_DIAMETER), BALL_DIAMETER, BALL_DIAMETER);
+
+		//ACA MEJORAR
+		int randomXDirection = random.nextInt(2);
+		if(randomXDirection == 0) {
+			randomXDirection--;
+		}
+		setXDirection(randomXDirection*initialSpeed);
+		
+		int randomYDirection = random.nextInt(2);
+		if(randomYDirection == 0) {
+			randomYDirection--;
+		}
+		setYDirection(randomYDirection*initialSpeed);
+	}
+	
+	
 	
 	public void setXDirection(int ramdomXDirection) {
 		xVelocity = ramdomXDirection;
@@ -100,23 +120,4 @@ public class Ball extends Rectangle {
 		return false;
 	}
 	
-	// ball.changeDirection();
-	// increaseSpeed();
-	// move()
-	
-	
-	//if(ball.intersects(paddle2)) {
-	//ball.xVelocity = -ball.xVelocity;
-	
-	//ball.xVelocity--; // va aumnetado la velociadd opcional
-	//if(ball.yVelocity>0) {
-		//ball.yVelocity++;
-	//}
-	//else {
-		//ball.yVelocity--;
-	//}
-	
-	//ball.setXDirection(ball.xVelocity);
-	//ball.setYDirection(ball.yVelocity);
-	//}
 }
