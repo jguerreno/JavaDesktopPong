@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.util.HashMap;
+
+import direction.*;
 
 
 public class Paddle extends Rectangle {
@@ -17,8 +20,13 @@ public class Paddle extends Rectangle {
 	private int speed = 8;
 	
 	// Direction currentDirection;
-	private int keyUp;
-	private int keyDown;
+	//Controller controller;
+	//	|-> Controller(up, down);
+	//	|-> addUpKey() y addDownKey()
+	//	|-> nextMove(idKey) un if que devuelva un delta Variacion o un 0
+	HashMap<Integer, Move> controller = new HashMap<Integer, Move>();
+	//private int keyUp;
+	//private int keyDown;
 	
 	// Score
 	private int score = 0;
@@ -27,11 +35,20 @@ public class Paddle extends Rectangle {
 	public Paddle(int x, int y, int keyUp, int keyDown) {
 		super(x, y, PADDLE_WIDTH,PADDLE_HEIGHT);
 		
-		this.keyUp = keyUp;
-		this.keyDown = keyDown;
+		//this.keyUp = keyUp;
+		//this.keyDown = keyDown;
+		
+		controller.put(keyUp, new Up(speed));
+		controller.put(keyDown, new Down(speed));
 	}
 
 	public void keyPressed(KeyEvent e) {
+		final Move direction = controller.get(e.getKeyCode());
+		if(direction != null) {
+			setYDirection(direction.nextMove());
+			move();
+		}
+		/*
 		if(e.getKeyCode() == keyUp) {
 			setYDirection(-speed);
 			move();
@@ -41,12 +58,19 @@ public class Paddle extends Rectangle {
 			setYDirection(speed);
 			move();
 		}
+		*/
 	}
 	
 	public void keyReleased(KeyEvent e) {
+		final Move direction = controller.get(e.getKeyCode());
+		if(direction != null) {
+			this.stopPaddle();
+		}
+		/*
 		if(e.getKeyCode() == keyDown || e.getKeyCode() == keyUp) {
 			this.stopPaddle();
 		}
+		*/
 	}
 	
 	public void setYDirection(int yDirection) {
@@ -54,6 +78,7 @@ public class Paddle extends Rectangle {
 	}
 	
 	public void move() {
+		// y = direction.move(y) // Por Ahora no
 		y = y + yVelocity;
 	}
 	
@@ -63,12 +88,12 @@ public class Paddle extends Rectangle {
 		g.fillRect(x, y, width, height);
 	}
 
-
+/*
 	public void movePaddle() {
 		setYDirection(-speed);
 		move();
 	}
-	
+*/	
 	public void stopPaddle() {
 		setYDirection(0);
 		move();
